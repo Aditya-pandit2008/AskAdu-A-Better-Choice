@@ -1,4 +1,4 @@
-// chat.js — Full Chat + STT + Streaming TTS + Queue + Auto-read + Controls (No Waveform)
+// chat.js — Full Chat + FREE STT + FREE TTS (Hindi + Marathi + English) + Queue + Auto-read + Controls (No Waveform)
 // UX: shows "Listening..." and "Thinking..." states + Theme toggle
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,40 +8,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const voiceBtn = document.getElementById('voiceBtn');
   const speakBtn = document.getElementById('speakBtn');
   const stopBtn = document.getElementById('stopBtn');
-  const voiceSelect = document.getElementById('voiceSelect');
+  const voiceSelect = document.getElementById('voiceSelect'); // kept for UI (not used)
   const themeToggle = document.getElementById('themeToggle');
 
   if (!searchInput) return;
 
-// ===== Theme Toggle (Light → Gradient → Gray) =====
-const THEMES = ['light', 'gradient', 'gray'];
+  // ===== Theme Toggle (Light → Gradient → Gray) =====
+  const THEMES = ['light', 'gradient', 'gray'];
 
-function applyTheme(theme) {
-  document.body.classList.remove('gradient', 'gray');
+  function applyTheme(theme) {
+    document.body.classList.remove('gradient', 'gray');
+    if (theme === 'gradient') document.body.classList.add('gradient');
+    if (theme === 'gray') document.body.classList.add('gray');
+    localStorage.setItem('theme', theme);
 
-  if (theme === 'gradient') document.body.classList.add('gradient');
-  if (theme === 'gray') document.body.classList.add('gray');
+    if (themeToggle) {
+      themeToggle.textContent =
+        theme === 'light' ? '🌤️ Light' :
+        theme === 'gradient' ? '🌈 Gradient' :
+        '🌫️ Gray';
+    }
+  }
 
-  localStorage.setItem('theme', theme);
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  applyTheme(savedTheme);
 
   if (themeToggle) {
-    themeToggle.textContent =
-      theme === 'light' ? '🌤️ Light' :
-      theme === 'gradient' ? '🌈 Gradient' :
-      '🌫️ Gray';
+    themeToggle.onclick = () => {
+      const current = localStorage.getItem('theme') || 'light';
+      const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
+      applyTheme(next);
+    };
   }
-}
-
-const savedTheme = localStorage.getItem('theme') || 'light';
-applyTheme(savedTheme);
-
-if (themeToggle) {
-  themeToggle.onclick = () => {
-    const current = localStorage.getItem('theme') || 'light';
-    const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
-    applyTheme(next);
-  };
-}
 
   let conversationHistory = [];
   const MAX_HISTORY = 10;
@@ -74,7 +72,6 @@ Keep replies concise and practical.
     searchInput.parentNode.insertBefore(chatContainer, searchInput.nextSibling);
   }
 
-  // ===== Timestamp helper =====
   function getTimestamp() {
     const now = new Date();
     return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -106,12 +103,8 @@ Keep replies concise and practical.
       ? (document.body.classList.contains('gradient') ? 'rgba(0,0,0,0.45)' : '#e5e7eb')
       : (document.body.classList.contains('gradient') ? 'rgba(255,255,255,0.15)' : '#f3f4f6');
 
-    // Markdown rendering fix
-    if (window.marked) {
-      bubble.innerHTML = marked.parse(text);
-    } else {
-      bubble.textContent = text;
-    }
+    if (window.marked) bubble.innerHTML = marked.parse(text);
+    else bubble.textContent = text;
 
     wrapper.appendChild(time);
     wrapper.appendChild(bubble);
@@ -119,9 +112,7 @@ Keep replies concise and practical.
     chatContainer.scrollTop = chatContainer.scrollHeight;
   }
 
-  // ===== Status message =====
   let statusEl = null;
-
   function showStatus(text) {
     if (!statusEl) {
       statusEl = document.createElement('div');
@@ -134,7 +125,6 @@ Keep replies concise and practical.
     statusEl.textContent = text;
     chatContainer.scrollTop = chatContainer.scrollHeight;
   }
-
   function clearStatus() {
     if (statusEl) {
       statusEl.remove();
@@ -142,55 +132,26 @@ Keep replies concise and practical.
     }
   }
 
-  // ===== Clear chat =====
-  const clearBtn = document.createElement('button');
-  clearBtn.textContent = '🧹 Clear Chat';
-  clearBtn.className = 'main-search-option';
-  clearBtn.onclick = () => {
-    chatContainer.innerHTML = '';
-    conversationHistory = [];
-  };
-
-  const optionsBar = document.querySelector('.main-search-options');
-  if (optionsBar && !document.getElementById('clearChatBtn')) {
-    clearBtn.id = 'clearChatBtn';
-    optionsBar.appendChild(clearBtn);
-  }
-
-  // ===== TTS Queue =====
+  // ===== TTS Queue (FREE Browser TTS) =====
   let ttsQueue = [];
   let isSpeaking = false;
-  let currentAudio = null;
 
-  function detectLanguage(text) {
-    if (/[\u0900-\u097F]/.test(text)) return 'hi';
-    if (/[\u4E00-\u9FFF]/.test(text)) return 'zh';
-    if (/[\u3040-\u30FF]/.test(text)) return 'ja';
-    return 'en';
+  function detectLangForTTS(text) {
+    if (/[\u0900-\u097F]/.test(text)) return 'hi-IN'; // Hindi/Marathi script
+    return 'en-IN';
   }
 
-  async function speakTextStream(text) {
-    const voiceId = voiceSelect ? voiceSelect.value : 'EXAVITQu4vr4xnSDxMaL';
-    const language = detectLanguage(text);
+  function speakFreeTTS(text) {
+    if (!('speechSynthesis' in window)) return Promise.resolve();
 
-    const res = await fetch('/api/tts-stream', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, voice_id: voiceId, language })
-    });
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = detectLangForTTS(text);
+    utter.rate = 1;
+    utter.pitch = 1;
 
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio = null;
-    }
-
-    currentAudio = new Audio(url);
     return new Promise(resolve => {
-      currentAudio.onended = resolve;
-      currentAudio.play();
+      utter.onend = resolve;
+      window.speechSynthesis.speak(utter);
     });
   }
 
@@ -199,7 +160,7 @@ Keep replies concise and practical.
     isSpeaking = true;
     const next = ttsQueue.shift();
     try {
-      await speakTextStream(next);
+      await speakFreeTTS(next);
     } finally {
       isSpeaking = false;
       processQueue();
@@ -208,10 +169,7 @@ Keep replies concise and practical.
 
   if (stopBtn) {
     stopBtn.onclick = () => {
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-      }
+      window.speechSynthesis.cancel();
       ttsQueue = [];
       isSpeaking = false;
     };
@@ -245,46 +203,50 @@ Keep replies concise and practical.
 
       ttsQueue.push(reply);
       processQueue();
-
-    } catch (e) {
+    } catch {
       clearStatus();
       appendMessage('assistant', 'Oops, something went wrong 😅 Try again in a sec.');
     }
   }
 
-  // ===== Events =====
   searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendMessage(searchInput.value);
   });
-
   if (searchButton) searchButton.addEventListener('click', () => sendMessage(searchInput.value));
 
-  // ===== STT =====
+  // ===== FREE STT (Hindi + Marathi + English) =====
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
   if (voiceBtn) {
-    let mediaRecorder;
-    let chunks = [];
+    if (!SpeechRecognition) {
+      voiceBtn.disabled = true;
+      voiceBtn.textContent = '❌ STT';
+    } else {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = true;
 
-    voiceBtn.addEventListener('click', async () => {
-      showStatus('🎙️ Listening...');
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
-      mediaRecorder = new MediaRecorder(stream);
-      chunks = [];
-      mediaRecorder.ondataavailable = e => chunks.push(e.data);
-
-      mediaRecorder.onstop = async () => {
-        clearStatus();
-        const blob = new Blob(chunks, { type: 'audio/webm' });
-        const fd = new FormData();
-        fd.append('audio', blob);
-        const res = await fetch('/api/stt', { method: 'POST', body: fd });
-        const data = await res.json();
-        searchInput.value = data.text || '';
+      voiceBtn.onclick = () => {
+        showStatus('🎙️ Listening...');
+        recognition.lang = 'mr-IN'; // Marathi (change to hi-IN or en-IN if needed)
+        recognition.start();
       };
 
-      mediaRecorder.start();
-      setTimeout(() => mediaRecorder.stop(), 4000);
-    });
+      recognition.onresult = (e) => {
+        let finalText = '';
+        let interim = '';
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+          const t = e.results[i][0].transcript;
+          if (e.results[i].isFinal) finalText += t + ' ';
+          else interim += t;
+        }
+        searchInput.value = finalText + interim;
+        if (finalText.trim()) sendMessage(finalText);
+      };
+
+      recognition.onerror = () => clearStatus();
+      recognition.onend = () => clearStatus();
+    }
   }
 
   // ===== Manual speak =====
