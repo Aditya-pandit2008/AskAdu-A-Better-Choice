@@ -1,0 +1,567 @@
+/* Business Page Styles */
+
+.business-main {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Section */
+.business-hero {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideInDown 0.8s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.business-hero-content h1 {
+  font-size: 3em;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.hero-subtitle {
+  font-size: 1.3em;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Business Intro */
+.business-intro {
+  margin-bottom: 60px;
+  animation: slideInUp 0.6s ease-out;
+}
+
+.intro-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  text-align: center;
+}
+
+.intro-card h2 {
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.intro-card p {
+  color: #666;
+  font-size: 1.05em;
+  line-height: 1.8;
+}
+
+/* Business Section */
+.business-section {
+  margin-bottom: 60px;
+  animation: slideInUp 0.6s ease-out;
+}
+
+.business-section h2 {
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-intro {
+  color: #666;
+  font-size: 1.05em;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* Use Cases Grid */
+.use-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.use-case-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  transition: all 0.3s ease;
+}
+
+.use-case-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 50px rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.use-case-icon {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  display: inline-block;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.use-case-card h3 {
+  color: #667eea;
+  font-size: 1.3em;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.use-case-card p {
+  color: #666;
+  font-size: 0.95em;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.benefits-list {
+  list-style: none;
+  padding-top: 15px;
+  border-top: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.benefits-list li {
+  color: #666;
+  padding: 8px 0;
+  padding-left: 24px;
+  position: relative;
+  font-size: 0.9em;
+}
+
+.benefits-list li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+/* Integration Section */
+.integration-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.integration-item {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.integration-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
+}
+
+.integration-icon {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.integration-item h3 {
+  color: #667eea;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.integration-item p {
+  color: #666;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.integration-note {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.integration-note p {
+  color: #555;
+  font-size: 0.95em;
+  line-height: 1.7;
+}
+
+/* Benefits Cards */
+.benefits-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+}
+
+.benefit-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 50px rgba(102, 126, 234, 0.2);
+}
+
+.benefit-number {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.benefit-card h3 {
+  color: #667eea;
+  font-size: 1.2em;
+  margin-bottom: 12px;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.benefit-card p {
+  color: #666;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+/* Partnerships Grid */
+.partnership-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+}
+
+.partnership-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.partnership-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 50px rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.partnership-icon {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  display: inline-block;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.partnership-card h3 {
+  color: #667eea;
+  font-size: 1.2em;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.partnership-card p {
+  color: #666;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+/* Contact Section */
+.contact-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.contact-card p {
+  color: #555;
+  font-size: 1.05em;
+  margin-bottom: 30px;
+  line-height: 1.7;
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.contact-item {
+  background: rgba(102, 126, 234, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 3px solid #667eea;
+}
+
+.contact-label {
+  display: block;
+  color: #667eea;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.95em;
+}
+
+.contact-value {
+  color: #555;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.contact-value a {
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-value a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+.contact-tip {
+  background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(79, 172, 254, 0.1) 100%);
+  border: 1px solid rgba(240, 147, 251, 0.2);
+  padding: 15px 20px;
+  border-radius: 8px;
+}
+
+.contact-tip p {
+  color: #555;
+  font-size: 0.95em;
+  margin: 0;
+}
+
+/* Disclaimer Section */
+.disclaimer-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(240, 147, 251, 0.2);
+}
+
+.disclaimer-card p {
+  color: #555;
+  font-size: 0.95em;
+  line-height: 1.8;
+}
+
+/* CTA Section */
+.business-cta {
+  text-align: center;
+  padding: 60px 40px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideInUp 0.6s ease-out;
+}
+
+.business-cta h2 {
+  font-size: 2.2em;
+  color: #333;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.business-cta p {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cta-btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.cta-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+}
+
+.cta-btn.secondary {
+  background: transparent;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.cta-btn.secondary:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .business-main {
+    padding: 20px 15px;
+  }
+
+  .business-hero {
+    padding: 40px 20px;
+    margin-bottom: 40px;
+  }
+
+  .business-hero-content h1 {
+    font-size: 2em;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1em;
+  }
+
+  .business-section h2 {
+    font-size: 1.6em;
+  }
+
+  .intro-card {
+    padding: 25px;
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr;
+  }
+
+  .business-cta {
+    padding: 40px 25px;
+  }
+
+  .business-cta h2 {
+    font-size: 1.8em;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .business-hero-content h1 {
+    font-size: 1.5em;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95em;
+  }
+
+  .business-section h2 {
+    font-size: 1.4em;
+  }
+
+  .use-case-icon,
+  .integration-icon,
+  .partnership-icon {
+    font-size: 2em;
+  }
+
+  .benefit-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+  }
+}

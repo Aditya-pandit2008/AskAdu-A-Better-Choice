@@ -1,0 +1,67 @@
+/* Download Page Styles */
+
+.download-main {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.download-hero {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 40px 20px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.download-hero-content h1 {
+  font-size: 2.4em;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  color: #333;
+  font-size: 1.1em;
+  margin-top: 8px;
+}
+
+.info-card, .dev-card, .notify-card, .short-card {
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(102,126,234,0.1);
+  margin-bottom: 16px;
+}
+
+.info-card h2 {
+  color: #667eea;
+  margin-bottom: 8px;
+}
+
+.dev-card h3, .notify-card h3, .short-card h3 {
+  color: #764ba2;
+  margin-bottom: 8px;
+}
+
+.download-cta {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cta-btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+@media (max-width:768px) {
+  .download-main { padding: 20px; }
+  .download-hero-content h1 { font-size: 1.8em; }
+}

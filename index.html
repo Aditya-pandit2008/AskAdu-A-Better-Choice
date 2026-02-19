@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AskAdu-A better choice</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="nav-left">
+      <div class="img"><img src="chatgpt.png" class="ai-icon" alt="ChatGPT logo"></div>
+      <span class="title">AskAdu-A Better Choice</span>
+    </div>
+
+    <div class="nav-center">
+      <a href="about/index.html">About</a>
+      <a href="feature/index.html">Feature</a>
+      <a href="learn/index.html">Learn</a>
+      <a href="business/index.html">Business</a>
+      <a href="pricing/index.html">Pricing</a>
+      <a href="#">Images</a>
+      <a href="download/index.html">Download</a>
+    </div>
+
+    <div class="nav-right">
+      <a href="login page/index.html" class="login">Log in</a>
+      <a href="sign up/index.html" class="signup">Sign up</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="hi">
+      <h2>What’s on the agenda today?</h2>
+    </div>
+
+    <div class="main-search-bar">
+      <input type="text" class="main-search-input" placeholder="Ask anything..." />
+
+      <div class="main-search-options">
+        <button class="main-search-option">Search</button>
+        <button class="main-search-option" id="speakBtn">🔊 Speak</button>
+        <button class="main-search-option voice" id="voiceBtn">🎤 Voice</button>
+        <button class="main-search-option" id="themeToggle">🌗 Theme</button>
+
+        <!-- New controls -->
+        <select id="voiceSelect" class="main-search-option">
+          <option value="EXAVITQu4vr4xnSDxMaL">Rachel (EN)</option>
+          <option value="TxGEqnHWrfWFTfGW9XjX">Josh (EN)</option>
+          <option value="pNInz6obpgDQGcFmaJgB">Adam (EN)</option>
+        </select>
+
+        <button class="main-search-option" id="stopBtn">⏹ Stop</button>
+      </div>
+
+      <!-- Live mic waveform -->
+      <canvas id="micWave" width="280" height="40" style="display:none; margin: 12px auto 0;"></canvas>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>AskAdu</h3>
+        <p>Your friendly AI assistant for daily questions, learning, and creativity.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Product</h4>
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">Download</a>
+        <a href="#">Images</a>
+      </div>
+
+      <div class="footer-links">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © <span id="year"></span> AskAdu. All rights reserved.
+    </div>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="chat.js"></script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+
+</html>
